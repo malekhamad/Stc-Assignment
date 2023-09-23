@@ -38,6 +38,7 @@ dependencies {
     implementation(Deps.coreKtx)
     implementation(Deps.appCompat)
     implementation(Deps.daggerHilt)
+    implementation(Deps.paging)
 
     kapt(Deps.daggerHiltCompiler)
 

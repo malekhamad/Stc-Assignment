@@ -5,12 +5,18 @@ object Versions{
     const val constraintLayout = "2.1.4"
     const val lifeCycle = "2.4.0"
 
+    const val gson = "2.10.1"
+
     const val daggerHilt = "2.48"
 
     const val navigation = "2.7.2"
 
     const val retrofit = "2.9.0"
     const val okhttpLogging = "4.11.0"
+
+    const val paging = "3.2.1"
+
+    const val room = "2.4.3"
 
     const val jUnit = "4.13.2"
     const val extJUnit = "1.1.5"
