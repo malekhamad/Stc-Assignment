@@ -2,6 +2,7 @@ object Plugins {
 
     const val application = "com.android.application"
     const val kotlinAndroid = "org.jetbrains.kotlin.android"
+    const val kotlinAndroidExt = "kotlin-android-extensions"
     const val kapt = "kapt"
     const val library = "com.android.library"
     const val jvm = "org.jetbrains.kotlin.jvm"

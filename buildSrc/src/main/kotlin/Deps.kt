@@ -28,6 +28,7 @@ object Deps {
     val roomRuntime by lazy {"androidx.room:room-runtime:${Versions.room}"}
     val roomKtx by lazy {"androidx.room:room-ktx:${Versions.room}"}
     val roomPaging by lazy {"androidx.room:room-paging:${Versions.room}"}
+    val roomCoroutines by lazy {"androidx.room:room-coroutines:${Versions.room}"}
     val roomCompiler by lazy {"androidx.room:room-compiler:${Versions.room}"}
 
 

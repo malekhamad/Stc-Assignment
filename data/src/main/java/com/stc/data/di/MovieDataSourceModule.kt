@@ -18,5 +18,7 @@ class MovieDataSourceModule {
     fun provideMovieRemoteDataSource(
         movieService: MovieService,
         moviesDatabase: MoviesDatabase,
-    ) = MovieRemoteDataSource(movieService, moviesDatabase)
+    ) : MovieRemoteDataSource {
+        return MovieRemoteDataSource(movieService, moviesDatabase)
+    }
 }

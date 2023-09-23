@@ -1,5 +1,5 @@
 plugins {
-    id(Plugins.application)
+    id(Plugins.library)
     id(Plugins.kotlinAndroid)
     id(Plugins.daggerHilt)
     kotlin(Plugins.kapt)
@@ -30,15 +30,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = AppConfigs.jvmCompatability
-        sourceCompatibility = AppConfigs.jvmCompatability
+        sourceCompatibility = AppConfigs.jamCompatibility
+        targetCompatibility = AppConfigs.jamCompatibility
     }
     kotlinOptions {
         jvmTarget = AppConfigs.jvmTarget
     }
     buildFeatures {
         buildConfig = true
+        dataBinding= true
+        viewBinding = true
     }
+
 }
 
 dependencies {
@@ -59,10 +62,8 @@ dependencies {
     implementation(Deps.roomPaging)
     implementation(Deps.gson)
 
-
     kapt(Deps.daggerHiltCompiler)
     kapt(Deps.roomCompiler)
-
 
     testImplementation(Deps.jUnit)
     androidTestImplementation(Deps.extJUnit)

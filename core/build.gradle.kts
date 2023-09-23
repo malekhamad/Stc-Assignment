@@ -1,8 +1,6 @@
 plugins {
     id(Plugins.library)
     id(Plugins.kotlinAndroid)
-    kotlin(Plugins.kapt)
-
 
 }
 
@@ -27,8 +25,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = AppConfigs.jvmCompatability
-        sourceCompatibility = AppConfigs.jvmCompatability
+        sourceCompatibility = AppConfigs.jamCompatibility
+        targetCompatibility = AppConfigs.jamCompatibility
     }
     kotlinOptions {
         jvmTarget = AppConfigs.jvmTarget
@@ -42,15 +40,13 @@ android {
 
 dependencies {
 
-    implementation("${Deps.coreKtx}:${Versions.coreKtx}")
-    implementation("${Deps.appCompat}:${Versions.appCompat}")
-    implementation("${Deps.material}:${Versions.material}")
+    implementation(Deps.coreKtx)
+    implementation(Deps.appCompat)
+    implementation(Deps.material)
 
 
     testImplementation(Deps.jUnit)
     androidTestImplementation(Deps.extJUnit)
-    androidTestImplementation(Deps.espresso)}
-
-kapt {
-    correctErrorTypes = true
+    androidTestImplementation(Deps.espresso)
 }
+

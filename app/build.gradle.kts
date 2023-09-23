@@ -31,11 +31,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = AppConfigs.jvmCompatability
-        targetCompatibility = AppConfigs.jvmCompatability
+        sourceCompatibility = AppConfigs.jamCompatibility
+        targetCompatibility = AppConfigs.jamCompatibility
     }
     kotlinOptions {
         jvmTarget = AppConfigs.jvmTarget
+    }
+    buildFeatures{
+        dataBinding= true
+        viewBinding = true
     }
 }
 
@@ -53,9 +57,7 @@ dependencies {
     implementation(Deps.navigationFragment)
     implementation(Deps.navigationUi)
 
-
     kapt(Deps.daggerHiltCompiler)
-
 
     testImplementation(Deps.jUnit)
     androidTestImplementation(Deps.extJUnit)

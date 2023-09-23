@@ -16,7 +16,7 @@ object Versions{
 
     const val paging = "3.2.1"
 
-    const val room = "2.4.3"
+    const val room = "2.4.2"
 
     const val jUnit = "4.13.2"
     const val extJUnit = "1.1.5"

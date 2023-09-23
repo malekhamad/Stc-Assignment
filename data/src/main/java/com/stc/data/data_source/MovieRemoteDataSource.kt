@@ -11,12 +11,17 @@ import com.stc.data.model.discover.RemoteKeys
 import com.stc.data.network.MovieService
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class MovieRemoteDataSource(
+class MovieRemoteDataSource @Inject constructor(
     private val movieService: MovieService,
     private val moviesDatabase: MoviesDatabase
 ) : RemoteMediator<Int, Movie>() {
+
+    override suspend fun initialize(): InitializeAction {
+        return InitializeAction.LAUNCH_INITIAL_REFRESH
+    }
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Movie>): MediatorResult {
         val page: Int = when (loadType) {
@@ -64,7 +69,7 @@ class MovieRemoteDataSource(
         }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Movie>): RemoteKeys? {
+    private fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, Movie>): RemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
                 moviesDatabase.getRemoteKeysDao().getRemoteKeyByMovieID(id)
@@ -72,7 +77,7 @@ class MovieRemoteDataSource(
         }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Movie>): RemoteKeys? {
+    private fun getRemoteKeyForFirstItem(state: PagingState<Int, Movie>): RemoteKeys? {
         return state.pages.firstOrNull {
             it.data.isNotEmpty()
         }?.data?.firstOrNull()?.let { movie ->
@@ -80,11 +85,14 @@ class MovieRemoteDataSource(
         }
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Movie>): RemoteKeys? {
+    private fun getRemoteKeyForLastItem(state: PagingState<Int, Movie>): RemoteKeys? {
         return state.pages.lastOrNull {
             it.data.isNotEmpty()
         }?.data?.lastOrNull()?.let { movie ->
             moviesDatabase.getRemoteKeysDao().getRemoteKeyByMovieID(movie.id)
         }
+
     }
+
+
 }

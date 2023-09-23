@@ -10,11 +10,11 @@ import com.stc.data.model.discover.Movie
 @Dao
 interface MoviesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(movies: List<Movie>)
+    fun insertAll(movies: List<Movie>)
 
     @Query("SELECT * FROM movies ORDER BY page")
     fun getMovies(): PagingSource<Int, Movie>
 
-    @Query("Delete From movies")
-    suspend fun clearAllMovies()
+    @Query("DELETE FROM movies")
+    fun clearAllMovies()
 }

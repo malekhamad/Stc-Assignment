@@ -1,14 +1,17 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    id(Plugins.library)
+    id(Plugins.kotlinAndroid)
+    kotlin(Plugins.kapt)
+    id(Plugins.safeArgs)
+    id(Plugins.daggerHilt)
 }
 
 android {
     namespace = "com.stc.movie"
-    compileSdk = 33
+    compileSdk = AppConfigs.compileSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = AppConfigs.minSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -24,20 +27,44 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = AppConfigs.jamCompatibility
+        targetCompatibility = AppConfigs.jamCompatibility
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = AppConfigs.jvmTarget
+    }
+
+    buildFeatures{
+        dataBinding= true
+        viewBinding = true
     }
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    api(project(Modules.Navigation))
+    implementation(project(Modules.Domain))
+    implementation(project(Modules.Core))
+
+    implementation(Deps.coreKtx)
+    implementation(Deps.appCompat)
+    implementation(Deps.material)
+    implementation (Deps.daggerHilt)
+    implementation(Deps.navigationFragment)
+    implementation(Deps.navigationUi)
+    implementation(Deps.liveData)
+    implementation(Deps.paging)
+
+    kapt (Deps.daggerHiltCompiler)
+
+    testImplementation(Deps.jUnit)
+    androidTestImplementation(Deps.extJUnit)
+    androidTestImplementation(Deps.espresso)
+}
+kapt {
+    correctErrorTypes = true
+}
+
+hilt {
+    enableExperimentalClasspathAggregation = true
 }

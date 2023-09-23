@@ -1,5 +1,5 @@
 plugins {
-    id(Plugins.application)
+    id(Plugins.library)
     id(Plugins.kotlinAndroid)
     id(Plugins.daggerHilt)
     kotlin(Plugins.kapt)
@@ -25,12 +25,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = AppConfigs.jvmCompatability
-        targetCompatibility = AppConfigs.jvmCompatability
+        sourceCompatibility = AppConfigs.jamCompatibility
+        targetCompatibility = AppConfigs.jamCompatibility
     }
     kotlinOptions {
         jvmTarget = AppConfigs.jvmTarget
     }
+    buildFeatures {
+        dataBinding= true
+        viewBinding = true
+    }
+
 }
 
 dependencies {

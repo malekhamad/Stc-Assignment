@@ -8,6 +8,7 @@ import androidx.paging.map
 import com.stc.data.data_source.MovieRemoteDataSource
 import com.stc.data.database.MoviesDatabase
 import com.stc.data.mapper.toEntity
+import com.stc.data.network.MovieService
 import com.stc.domain.entity.discover.MovieEntity
 import com.stc.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
@@ -21,18 +22,20 @@ class MovieRepositoryImpl @Inject constructor(
     : MovieRepository{
      val PAGE_SIZE = 20
 
-    @OptIn(ExperimentalPagingApi::class)
+    @ExperimentalPagingApi
     override fun getPopularMovies(): Flow<PagingData<MovieEntity>> {
        return  Pager(
            config = PagingConfig(
                pageSize = PAGE_SIZE,
-               prefetchDistance = 10,
+               prefetchDistance = 2,
                initialLoadSize = PAGE_SIZE,
            ),
-           pagingSourceFactory = {
+
+           remoteMediator = movieRemoteDataSource,
+           initialKey = 1,
+                   pagingSourceFactory = {
                moviesDatabase.getMoviesDao().getMovies()
            },
-           remoteMediator = movieRemoteDataSource
        ).flow.map { pageData ->
            pageData.map { movie->
                movie.toEntity()

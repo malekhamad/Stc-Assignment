@@ -9,7 +9,7 @@ import com.stc.data.model.discover.RemoteKeys
 
 @Database(
     entities = [Movie::class, RemoteKeys::class],
-    version = 1,
+    version = 2,
 )
 abstract class MoviesDatabase: RoomDatabase() {
     abstract fun getMoviesDao(): MoviesDao
